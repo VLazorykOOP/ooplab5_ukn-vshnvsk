@@ -9,7 +9,6 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-#include <windows.h>
 
 using namespace std;
 
@@ -26,7 +25,7 @@ public:
         brand = "default";
         cylinders = 0;
         power = 0;
-        cout << "Default constructor Car" << endl;
+        cout << "\nDefault constructor Car" << endl;
     }
 
     Car(string s, int c, int p) //конструктор з параметрами
@@ -34,7 +33,7 @@ public:
         brand = s;
         cylinders = c;
         power = p;
-        cout << "Consstructor Car" << endl;
+        cout << "\nConstructor Car" << endl;
     }
 
     Car(const Car& car) //конструктор копіювання
@@ -49,25 +48,13 @@ public:
         cout << "Destructor Car" << endl;
     }
 
-    string getBrand() 
-    {
-        return brand;
-    }
+    string getBrand(){ return brand; }
 
-    int getCylinders()
-    {
-        return cylinders;
-    }
+    int getCylinders(){ return cylinders; }
 
-    int getPower()
-    {
-        return power;
-    }
+    int getPower(){ return power; }
 
-    void setBrand(string b)
-    {
-        brand = b;
-    }
+    void setBrand(string b){ brand = b; }
 
     void setCylinders(int c)
     {
@@ -79,7 +66,7 @@ public:
 
     void setPower(int p)
     {
-        if(p <= 70 || p > 500)
+        if(p >= 70 && p <= 500)
             power = p;
         else 
             cout << "Power" << p << "not exist, power is " << power << endl;
@@ -93,41 +80,6 @@ public:
         power = cr.power;
         return *this;
     }
-
-
-
-   /* string toString()
-    {
-        string b, c, p;
-        c = to_string(cylinders);
-        p = to_string(power);
-        b = "Brand:" + brand + "Cylinders:" + c + "Power:" + p;
-        return b;
-    }
-
-    void Input()
-    {
-        cout << "Input brand:";
-        cin >> brand;
-
-        cout << "Input cylinders:";
-        while(!(cin >> cylinders) || (cylinders >= 4 && cylinders <= 12))
-        {
-            cin.clear();
-            cin.ignore(MAXSHORT, '\n');
-            fflush(stdin);
-            cout << "bad input cylinders is 4 to 12" << endl;
-        }
-
-        cout << "Input power:";
-        while(!(cin >> power) || (power >= 70 && power <= 500))
-        {
-            cin.clear();
-            cin.ignore(MAXSHORT, '\n');
-            fflush(stdin);
-            cout << "bad input power is 70 to 500" << endl;
-        }
-    }*/
 
     friend ostream& operator<<(ostream &os, const Car& cr);
     friend istream& operator>>(istream &is, Car& cr);
@@ -159,13 +111,13 @@ public:
     Trucks()
     {
         capacity = 0;
-        cout << "Default constructor" << endl;
+        cout << "Default constructor Trucks" << endl;
     }
 
     Trucks(string s, int c, float p, int cp) : Car(s, c, p)
     {
         capacity = cp;
-        cout << "Constructor Trucks(string s, int c, float p, int cp)" << endl;
+        cout << "Constructor Trucks" << endl;
     }
 
     Trucks(const Trucks& tr)
@@ -178,13 +130,10 @@ public:
 
     ~Trucks()
     {
-        cout << "Destuctor Trucks" << endl;
+        cout << "\nDestuctor Trucks" << endl;
     }
 
-    int getCapacity()
-    {
-        return capacity;
-    }
+    int getCapacity(){ return capacity; }
 
     void setCapacity(int cp)
     {
@@ -206,29 +155,6 @@ public:
 
     friend ostream& operator<<(ostream &os, const Trucks& t);
     friend istream& operator>>(istream &is, Trucks& t);
-
-
-
-   /* string toString()
-    {
-        string scapasity;
-        scapasity = to_string(capacity);
-        string s = Car::toString() + "Capacity:" + scapasity + "\n";
-        return s;
-    }
-
-    void Input()
-    {
-        Car::Input();
-        cout << "Input tone" << endl;
-        while (!(cin >> capacity) || capacity < 0 ) 
-        {
-            cin.clear();
-            cin.ignore(MAXSHORT, '\n');
-            fflush(stdin);
-            cout << "bad input ID \n";
-        }
-    }*/
 };
 
 ostream& operator<<(ostream &os, const Trucks& t)
@@ -259,9 +185,25 @@ void f1(Car& cr)
     cout << cr;
 }
 
+Car f2()
+{
+    Trucks l("Kia", 6, 300, 380);
+    return l;
+}
+
+
 int main()
 {
     Car a;
     cin >> a;
     cout << a;
+
+    Trucks c;
+    cin >> c;
+    cout << c;
+    //Принцип підстановки
+    f1(c); //передаємо об`єкт класу Trucks
+    a = f2(); //створюємо в функції об`єкт класу Trucks
+    cout << a;
+    return 0;
 }
