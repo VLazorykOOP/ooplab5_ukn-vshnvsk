@@ -1,16 +1,15 @@
 {
-	"version": "2.0.0",
-	"tasks": [ 
+	"tasks": [
 		{
 			"type": "cppbuild",
 			"label": "C/C++: g++.exe build active file",
-			"command": "C:\\msys64\\mingw64\\bin\\g++.exe",
+			"command": "C:\\mingw\\bin\\g++.exe",
 			"args": [
 				"-fdiagnostics-color=always",
 				"-g",
-				"${workspaceFolder}\\ooplab5t\\*.cpp",
+				"${file}",
 				"-o",
-				"${workspaceFolder}\\lab5oop.exe"
+				"${fileDirname}\\${fileBasenameNoExtension}.exe"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
@@ -19,7 +18,7 @@
 				"$gcc"
 			],
 			"group": "build",
-			"detail": "compiler: C:\\msys64\\mingw64\\bin\\g++.exe"
+			"detail": "compiler: C:\\mingw\\bin\\g++.exe"
 		}
 	]
 }
