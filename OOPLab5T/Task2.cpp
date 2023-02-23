@@ -43,12 +43,14 @@ public:
     {
         brand = new char[strlen(b) + 1];
         strcpy(brand, b);
+        cout << "Constructor Car" << endl;
     }
 
     Car(const Car& car) : price(car.price), engine(car.engine)  //конструктор копіювання
     {
         brand = new char[strlen(car.brand) + 1];
         strcpy(brand, car.brand);
+        cout << "Constructor copy Car" << endl;
     }
 
     ~Car()
@@ -68,8 +70,12 @@ class Truck : public Car
 private:
     int capacity;
 public:
-    Truck(const char* b, int p, const Engine& e, int c) : Car(b, p, e), capacity(c){}
-    Truck(const Truck& tr) : Car(tr), capacity(tr.capacity){}
+    Truck(const char* b, int p, const Engine& e, int c) : Car(b, p, e), capacity(c)
+    { cout << "Constructor Truck" << endl; } 
+
+    Truck(const Truck& tr) : Car(tr), capacity(tr.capacity)
+    { cout << "Constructor copy Truck" << endl; }
+    
     ~Truck(){ cout << "Destructor Truck" << endl; }
 
     int gerCapacity() const { return capacity; }
